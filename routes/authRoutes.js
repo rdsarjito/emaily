@@ -23,7 +23,7 @@ module.exports = app => {
 
   app.get(
     '/auth/facebook', passport.authenticate('facebook', {
-      scope: ['profile', 'email']
+      scope: ['user_friends', 'manage_pages']
     })
   );
 
