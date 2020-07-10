@@ -9,6 +9,13 @@ const credentials = {
   callbackURL: '/auth/google/callback',
   proxy: true
 };
+
+const credentialsFacebook = {
+  clientID: keys,
+  clientSecret: FACEBOOK_APP_SECRET,
+  callbackURL: "http://www.example.com/auth/facebook/callback"
+};
+
 const callbackStrategy = async (accessToken, refreshToken, profile, done) => {
   const existingUser = await User.findOne({ googleId: profile.id })
   if (existingUser){
