@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, TAMBAH_DATA_BARANG, STORE_TEMPLATE } from './types'
+import { FETCH_USER, TAMBAH_DATA_BARANG, STORE_TEMPLATE, ERROR_CREATE_TEMPLATE } from './types'
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
@@ -14,9 +14,13 @@ export const handleToken = (token) => async dispatch => {
 }
 
 export const storeTemplate = (template) => async dispatch => {
-    const res = await axios.post('/api/newTemplate', template);
-
-    dispatch({ type: STORE_TEMPLATE, payload: res.data });
+    
+    try {
+        const response = await axios.post('/api/new_template', template);
+        dispatch({ type: STORE_TEMPLATE, payload: response.data });
+    } catch (error) {
+        dispatch({ type: ERROR_CREATE_TEMPLATE, payload: { data: [], error: true } });
+    }
 }
 
 

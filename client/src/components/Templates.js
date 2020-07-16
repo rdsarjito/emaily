@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Template extends Component {
   render() {
@@ -11,7 +12,12 @@ class Template extends Component {
             List Template
           </h2>
           <div>
-            <a className="btn-floating btn-large waves-effect waves-light red" href="/template/new">add<i className="material-icons">add</i></a>
+          <Link 
+            className="btn-floating btn-large waves-effect waves-light red"
+            to="/template/new"
+          >
+            add<i className="material-icons">add</i>
+          </Link>
           </div>
         </div>
         <div className="template-collection">

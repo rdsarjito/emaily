@@ -5,14 +5,16 @@ const Template = mongoose.model('templates');
 
 
 module.exports = app => {
-  app.post('/api/newTemplate', async (req, res) => {
+  app.post('/api/new_template', async (req, res) => {
     
-    const namaTemplate = req.body.namaTemplate;
+    const { namaTemplate } = req.body;
+    const newTemplate = new Template({ namaTemplate });
 
-    const newTemplate = new Template({namaTemplate});
-
-    newTemplate.save()
-      .then(() => res.json(console.log(res)))
-      .catch(err => res.status(400).json('Error: ' + err))
+    try {
+      const data = await newTemplate.save();
+      res.status(201).send(data);
+    } catch (error) {
+      res.status(500).json({ data: null, error: true })
+    }
   })
 }

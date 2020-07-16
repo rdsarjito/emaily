@@ -10,7 +10,7 @@ import NewTemplate from './NewTemplate';
 class App extends Component {
   componentDidMount () {
     this.props.fetchUser();
-    this.props.storeTemplate();
+    // this.props.storeTemplate();
   };
 
   render() {

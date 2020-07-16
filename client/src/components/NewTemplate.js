@@ -36,6 +36,7 @@ class NewTemplate extends Component {
           </h2>
         </div>
         <div className="new-template-input">
+          {this.props.template.error && <h3>Error bro</h3>}
           <div className="row">
             <form className="col s12" onSubmit={this._onSubmit}>
               <div className="row">
@@ -58,4 +59,4 @@ class NewTemplate extends Component {
   };
 };
 
-export default connect(null, actions)(NewTemplate);
+export default connect(({ template }) => ({ template }), actions)(NewTemplate);
