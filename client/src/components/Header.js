@@ -1,3 +1,4 @@
+import '../styles/style.css'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,25 +11,26 @@ class Header extends Component {
         return;
       case false:
         return (
-          <ul>
-            <li>
-              <a href='/auth/facebook'>Login with Facebook</a>
-            </li>
-            <li>
-              <a href='/auth/google'>Login with Google</a>
-            </li>
-          </ul>
+          <li>
+            <a href='/auth/google'>Login with Google</a>
+          </li>
         );
       default:
         return [
-            <li key="1"><Payments /></li>,
-            <li key="3" style={{ margin: '0 10px' }}>
-              Credits: {this.props.auth.credits}
-            </li>,
-            <li key="2"><a href='/api/logout'>Logout</a></li>
+          <li key="1" className="avatar-box">
+            <img src={this.props.auth.avatar} alt="avatar" className="avatar"></img>
+          </li>,
+          <li key="2">
+            <a href="/template" className="btn">Add Template</a>
+          </li>,
+          <li key="3"><Payments /></li>,
+          <li key="4" style={{ margin: '0 10px' }}>
+            Credits: {this.props.auth.credits}
+          </li>,
+          <li key="5"><a href='/api/logout'>Logout</a></li>,
         ];
-    }
-  }
+    };
+  };
 
   render() {
     return (

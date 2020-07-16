@@ -4,25 +4,23 @@ import { connect } from 'react-redux';
 import * as actions from '../actions'
 
 import Header from './Header';
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
-const Landing = () => <h2>Landing</h2>
+import Template from './Templates';
+import NewTemplate from './NewTemplate';
 
 class App extends Component {
   componentDidMount () {
     this.props.fetchUser();
+    this.props.storeTemplate();
   };
 
   render() {
     return (
       <div className="container">
         <BrowserRouter>
-          <button onClick={this.props.addIncrement} >increment {this.props.counter}</button>
           <div>
             <Header />
-            <Route exact={true} path="/" component={Landing} />
-            <Route exact={true} path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
+            <Route exact={true} path="/template" component={Template} />
+            <Route path="/template/new" component={NewTemplate} />
           </div>
         </BrowserRouter>
       </div>
@@ -39,6 +37,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   fetchUser: actions.fetchUser,
+  storeTemplate: actions.storeTemplate,
   addIncrement: actions.addIncrement,
 }
 

@@ -1,7 +1,7 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import React from 'react';
-import ReactDOM, { render } from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
@@ -26,8 +26,8 @@ ReactDOM.render(
 );
 
 
-// console.log('STRIPE KEY IS', process.env.REACT_APP_STRIPE_KEY)
-// console.log('Enviroment is', process.env.NODE_ENV)
+console.log('STRIPE KEY IS', process.env.REACT_APP_STRIPE_KEY)
+console.log('Enviroment is', process.env)
 
 
 

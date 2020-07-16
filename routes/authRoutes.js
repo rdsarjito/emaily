@@ -21,12 +21,6 @@ module.exports = app => {
     })
   );
 
-  app.get(
-    '/auth/facebook', passport.authenticate('facebook', {
-      scope: ['user_friends', 'manage_pages']
-    })
-  );
-
   // app.get('/login', mid, handlerSelanjutnya, handleLogin);
 
   // app.get('/gagal', (req, res) => {
@@ -36,13 +30,6 @@ module.exports = app => {
   app.get(
     '/auth/google/callback',
     passport.authenticate('google'),
-    (req, res) => {
-      res.redirect('/surveys');
-    });
-
-  app.get(
-    '/auth/facebook/callback',
-    passport.authenticate('facebook'),
     (req, res) => {
       res.redirect('/surveys');
     });

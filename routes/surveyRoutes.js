@@ -8,6 +8,7 @@ module.exports = app => {
   app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
+    console.log(req.body)
     const survey = new Survey({
       title,
       subject,

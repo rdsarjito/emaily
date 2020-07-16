@@ -1,0 +1,18 @@
+h2 {
+  margin: 0;
+}
+.avatar {
+  width: 24.4%;
+}
+.avatar-box {
+  width: 36.6%;
+  height: 10%;
+}
+.add-template {
+  margin-right: 10px;
+}
+.template-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
