@@ -10,7 +10,6 @@ import NewTemplate from './NewTemplate';
 class App extends Component {
   componentDidMount () {
     this.props.fetchUser();
-    // this.props.storeTemplate();
   };
 
   render() {
@@ -28,17 +27,8 @@ class App extends Component {
   };
 };
 
-const mapStateToProps = (state) => {
-  return {
-    listDataBarang: state.barang.listBarang,
-    counter: state.increment,
-  }
-}
-
 const mapDispatchToProps = {
   fetchUser: actions.fetchUser,
-  storeTemplate: actions.storeTemplate,
-  addIncrement: actions.addIncrement,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

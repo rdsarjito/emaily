@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getTemplate } from '../actions'
 
 class Template extends Component {
+  componentDidMount() {
+    this.props.getTemplate();
+  }
+
+  _renderTemplate() {
+    return this.props.template.map(template => {
+      return (
+        <h1>{template.namaTemplate}</h1>
+      )
+    })
+  }
+
   render() {
-    console.log(this.props.template)
     return (
       <div className="template">
         <div className="template-title">
-          <h2>
-            List Template
-          </h2>
           <div>
           <Link 
             className="btn-floating btn-large waves-effect waves-light red"
@@ -22,10 +31,7 @@ class Template extends Component {
         </div>
         <div className="template-collection">
           <div className="collection">
-            <a href="#!" className="collection-item active">Alvin</a>
-            <a href="#!" className="collection-item">Alvin</a>
-            <a href="#!" className="collection-item">Alvin</a>
-            <a href="#!" className="collection-item">Alvin</a>
+          {this._renderTemplate()}
           </div>
         </div>
       </div>
@@ -34,7 +40,8 @@ class Template extends Component {
 };
 
 function mapStateToProps({ template }) {
-  return { template: template }
+  return { template }
 }
 
-export default connect(mapStateToProps)(Template);
+
+export default connect(mapStateToProps, { getTemplate })(Template);

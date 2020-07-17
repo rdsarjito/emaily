@@ -16,6 +16,7 @@ class Header extends Component {
           </li>
         );
       default:
+        console.log(this.props.auth)
         return [
           <li key="1" className="avatar-box">
             <img src={this.props.auth.avatar} alt="avatar" className="avatar"></img>

@@ -7,30 +7,13 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
 import App from './components/App'
-// import Increment from './components/Increment';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
-// function App() {
-//   return (
-//     <>
-//       <p>Test</p>
-//       <Increment />
-//     </>
-//   );
-// };
 
 ReactDOM.render(
   <Provider store={store}><App /></Provider> , 
   document.querySelector('#app')  
 );
-
-
-console.log('STRIPE KEY IS', process.env.REACT_APP_STRIPE_KEY)
-console.log('Enviroment is', process.env)
-
-
-
 
 
 
