@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, STORE_TEMPLATE, ERROR_CREATE_TEMPLATE, GET_TEMPLATE } from './types'
+import { FETCH_USER, FETCH_TEMPLATE, STORE_TEMPLATE, ERROR_CREATE_TEMPLATE, ERROR_FETCH_TEMPLATE, DELETE_TEMPLATE, ERROR_DELETE_TEMPLATE } from './types'
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
@@ -22,8 +22,20 @@ export const storeTemplate = (template) => async dispatch => {
     }
 };
 
-export const getTemplate = () => async dispatch => {
-    const res = await axios.get('/api/current_template');
-
-    dispatch({ type: GET_TEMPLATE , payload: res.data});
+export const fetchTemplate = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/current_template');
+        dispatch({ type: FETCH_TEMPLATE , payload: res.data });
+    } catch (error) {
+        dispatch({ type: ERROR_FETCH_TEMPLATE, payload: { data: [], error: true} });
+    }
 };
+
+export const deleteTemplate = (id) => async dispatch => {
+    try {
+        const res = await axios.delete('/api/current_template/'+id);
+        dispatch({ type: DELETE_TEMPLATE , payload: res.data });
+    } catch {
+        dispatch({ type: ERROR_DELETE_TEMPLATE, payload: { data: [], error: true} });
+    }
+}

@@ -36,19 +36,16 @@ class NewTemplate extends Component {
           </h2>
         </div>
         <div className="new-template-input">
-          {this.props.template.error && <h3>Error bro</h3>}
           <div className="row">
             <form className="col s12" onSubmit={this._onSubmit}>
               <div className="row">
                 <div className="input-field col s6">
-                  <input onChange={this._inputNamaTemplate} value={this.state.namaTemplate} type="text" className="validate"></input>
-                  <label htmlFor="nama_template">Nama Template</label>
+                  <input onChange={this._inputNamaTemplate} placeholder="Nama Template" value={this.state.namaTemplate} type="text" className="validate"></input>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s12">
-                  <textarea id="textarea1" className="materialize-textarea"></textarea>
-                  <label htmlFor="textarea1">Emaily</label>
+                  <textarea ></textarea>
                 </div>
               </div>
             </form>

@@ -10,6 +10,7 @@ import NewTemplate from './NewTemplate';
 class App extends Component {
   componentDidMount () {
     this.props.fetchUser();
+    this.props.fetchTemplate();
   };
 
   render() {
@@ -29,6 +30,6 @@ class App extends Component {
 
 const mapDispatchToProps = {
   fetchUser: actions.fetchUser,
+  fetchTemplate: actions.fetchTemplate,
 }
-
 export default connect(null, mapDispatchToProps)(App);

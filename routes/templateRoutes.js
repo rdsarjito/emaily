@@ -19,4 +19,9 @@ module.exports = app => {
     Template.find()
       .then(template => res.json(template))
   });
+
+  app.delete('/api/current_template/:id', (req, res) => {
+    Template.findByIdAndDelete(req.params.id)
+      .then(() => res.json('exercide delete'))
+  })
 };
