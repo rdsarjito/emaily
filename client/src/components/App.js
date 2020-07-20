@@ -6,6 +6,7 @@ import * as actions from '../actions'
 import Header from './Header';
 import Template from './Templates';
 import NewTemplate from './NewTemplate';
+import EditTemplate from './EditTamplate';
 
 class App extends Component {
   componentDidMount () {
@@ -21,6 +22,7 @@ class App extends Component {
             <Header />
             <Route exact={true} path="/template" component={Template} />
             <Route path="/template/new" component={NewTemplate} />
+            <Route  path="/template/edit" component={EditTemplate} />
           </div>
         </BrowserRouter>
       </div>

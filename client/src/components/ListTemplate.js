@@ -1,32 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { Link } from 'react-router-dom';
 
-class LisTemplate extends Component {
+class ListTemplate extends Component {
   constructor() {
     super();
 
-    this.state = {templates: []};
+    this._deleteTemplate = this._deleteTemplate.bind(this);
   }
 
-  componentDidMount() {
+
+  _deleteTemplate(id) {
+    this.props.deleteTemplate(id);
     this.props.fetchTemplate();
+    this.render();
   }
 
   _renderList() {
     return this.props.templates.map(template => {
       return (
-        <div>
-          <li className="collection-item" key={template._id}>
-            {template.namaTemplate}
-            <button onClick={() => { this.props.deleteTemplate(template._id) }}>delete</button>
-          </li>
-        </div>
+        <li key={template._id} className="collection-item">
+          {template.namaTemplate}
+          <div>
+            <Link
+              className="btn edit-template"
+              to="/template/edit"
+            >
+              edit
+            </Link>
+            <button className="btn" onClick={() => { this._deleteTemplate(template._id) }}>delete</button>
+          </div>
+        </li>
       )
     });
   };
-
-  de
 
   render() {
     return (
@@ -47,4 +55,4 @@ const mapDispatchToProps = {
   deleteTemplate: actions.deleteTemplate,
 }
   
-export default connect(mapStateToProps, mapDispatchToProps)(LisTemplate);
+export default connect(mapStateToProps, mapDispatchToProps)(ListTemplate);
