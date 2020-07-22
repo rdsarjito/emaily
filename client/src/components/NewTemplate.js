@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { Link } from 'react-router-dom';
 
 class NewTemplate extends Component {
   constructor() {
@@ -30,10 +31,16 @@ class NewTemplate extends Component {
   render() {
     return (
       <div className="new-template">
-        <div className="new-template-title">
+        <div className="template-title">
           <h2>
             New Template
           </h2>
+          <Link 
+            className="btn-floating btn-large waves-effect waves-light red"
+            to="/template/"
+          >
+            back<i className="material-icons"></i>
+          </Link>
         </div>
         <div className="new-template-input">
           <div className="row">
@@ -45,7 +52,7 @@ class NewTemplate extends Component {
               </div>
               <div className="row">
                 <div className="input-field col s12">
-                  <textarea ></textarea>
+                  <textarea></textarea>
                 </div>
               </div>
             </form>

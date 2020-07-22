@@ -20,6 +20,18 @@ module.exports = app => {
       .then(template => res.json(template))
   });
 
+  app.post('/api/current_template/update/:id', (req, res) => {
+    Template.findById(req.params.id)
+      .then(template => {
+        template.namaTemplate = req.body.namaTemplate;
+
+        template.save()
+          .then(() => res.json('Exercise updated!'))
+          .catch(err => res.status(400).json('Error: ' + err));
+      })
+      .catch(err => res.status(400).json('Error: ' + err));
+  })
+
   app.delete('/api/current_template/:id', (req, res) => {
     Template.findByIdAndDelete(req.params.id)
       .then(() => res.json())

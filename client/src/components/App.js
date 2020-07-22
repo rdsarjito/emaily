@@ -22,7 +22,7 @@ class App extends Component {
             <Header />
             <Route exact={true} path="/template" component={Template} />
             <Route path="/template/new" component={NewTemplate} />
-            <Route  path="/template/edit" component={EditTemplate} />
+            <Route path="/template/edit/:id" component={EditTemplate} />
           </div>
         </BrowserRouter>
       </div>

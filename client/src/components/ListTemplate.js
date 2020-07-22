@@ -9,14 +9,13 @@ class ListTemplate extends Component {
 
     this._deleteTemplate = this._deleteTemplate.bind(this);
   }
-
-
+  
   _deleteTemplate(id) {
     this.props.deleteTemplate(id);
     this.props.fetchTemplate();
     this.render();
   }
-
+  
   _renderList() {
     return this.props.templates.map(template => {
       return (
@@ -25,7 +24,7 @@ class ListTemplate extends Component {
           <div>
             <Link
               className="btn edit-template"
-              to="/template/edit"
+              to={"/template/edit/"+template._id}
             >
               edit
             </Link>
