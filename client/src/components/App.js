@@ -11,7 +11,6 @@ import EditTemplate from './EditTamplate';
 class App extends Component {
   componentDidMount () {
     this.props.fetchUser();
-    this.props.fetchTemplate();
   };
 
   render() {

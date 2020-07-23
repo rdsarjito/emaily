@@ -9,6 +9,10 @@ class ListTemplate extends Component {
 
     this._deleteTemplate = this._deleteTemplate.bind(this);
   }
+
+  componentDidMount() {
+    this.props.fetchTemplate();
+  }
   
   _deleteTemplate(id) {
     this.props.deleteTemplate(id);
@@ -17,10 +21,12 @@ class ListTemplate extends Component {
   }
   
   _renderList() {
+    console.log(this.props.templates)
     return this.props.templates.map(template => {
       return (
         <li key={template._id} className="collection-item">
           {template.namaTemplate}
+          <img alt="idk" width="150" src={template.fileOrigin} />
           <div>
             <Link
               className="btn edit-template"
@@ -46,7 +52,7 @@ class ListTemplate extends Component {
 
 
 function mapStateToProps({ templates }) {
-  return { templates }
+  return { templates: templates.map(t => ({ ...t, fileOrigin: t.file.replace('http://localhost:5000', window.location.origin) })) }
 }
 
 const mapDispatchToProps = {

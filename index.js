@@ -13,21 +13,24 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '5mb'
+}));
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey],
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/public', express.static('public'))
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app);
 require('./routes/templateRoutes')(app);
+require('./routes/uploadRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets

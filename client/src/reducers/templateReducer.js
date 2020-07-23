@@ -11,7 +11,7 @@ export default (state = [], action) => {
     case ERROR_CREATE_TEMPLATE:
       return action.payload || [];
     case ERROR_FETCH_TEMPLATE:
-      return action.payload || [];
+      return [];
     case ERROR_DELETE_TEMPLATE:
       return action.payload || [];
     default:
