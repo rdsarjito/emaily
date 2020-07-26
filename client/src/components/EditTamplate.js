@@ -38,7 +38,7 @@ class EditTamplate extends Component {
           </h2>
           <Link
             className="btn-floating btn-large waves-effect waves-light red"
-            to="/template/"
+            to="/template"
           >
             back<i className="material-icons"></i>
           </Link>

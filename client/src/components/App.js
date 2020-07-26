@@ -10,9 +10,7 @@ import EditTemplate from './EditTamplate';
 
 class App extends Component {
   componentDidMount () {
-    this.props.fetchUser();
-    this.props.fetchTemplate();
-  };
+    this.props.fetchUser();  };
 
   render() {
     return (
@@ -32,6 +30,5 @@ class App extends Component {
 
 const mapDispatchToProps = {
   fetchUser: actions.fetchUser,
-  fetchTemplate: actions.fetchTemplate,
 }
 export default connect(null, mapDispatchToProps)(App);

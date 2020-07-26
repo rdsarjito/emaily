@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Template = mongoose.model('templates');
 
 module.exports = app => {
-  app.post('/api/new_template', async (req, res) => {
+  app.post('/api/template/new', async (req, res) => {
     
     const { namaTemplate } = req.body;
     const newTemplate = new Template({ namaTemplate });
@@ -15,12 +15,12 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/current_template', (req, res) => {
+  app.get('/api/template', (req, res) => {
     Template.find()
       .then(template => res.json(template))
   });
 
-  app.post('/api/current_template/update/:id', (req, res) => {
+  app.post('/api/template/update/:id', (req, res) => {
     Template.findById(req.params.id)
       .then(template => {
         template.namaTemplate = req.body.namaTemplate;
@@ -32,7 +32,7 @@ module.exports = app => {
       .catch(err => res.status(400).json('Error: ' + err));
   })
 
-  app.delete('/api/current_template/:id', (req, res) => {
+  app.delete('/api/template/:id', (req, res) => {
     Template.findByIdAndDelete(req.params.id)
       .then(() => res.json())
   })

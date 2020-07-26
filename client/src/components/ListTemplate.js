@@ -8,13 +8,17 @@ class ListTemplate extends Component {
     super();
 
     this._deleteTemplate = this._deleteTemplate.bind(this);
-  }
+  };
+
+  componentDidMount() {
+    this.props.fetchTemplate();
+  };
   
   _deleteTemplate(id) {
     this.props.deleteTemplate(id);
     this.props.fetchTemplate();
-    this.render();
-  }
+    console.log(this.props.templates)
+  };
   
   _renderList() {
     return this.props.templates.map(template => {

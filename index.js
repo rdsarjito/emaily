@@ -13,7 +13,10 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '5mb'
+}));
+
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -24,10 +27,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/public', express.static('public'));
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app);
 require('./routes/templateRoutes')(app);
+require('./routes/uploadRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
@@ -40,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
-}
+};
 
 
 const PORT = process.env.PORT || 5000;

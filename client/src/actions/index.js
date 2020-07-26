@@ -15,7 +15,7 @@ export const handleToken = (token) => async dispatch => {
 
 export const storeTemplate = (template) => async dispatch => {
     try {
-        const response = await axios.post('/api/new_template', template);
+        const response = await axios.post('/api/template/new', template);
         dispatch({ type: STORE_TEMPLATE, payload: response.data });
     } catch (error) {
         dispatch({ type: ERROR_CREATE_TEMPLATE, payload: { data: [], error: true } });
@@ -24,7 +24,7 @@ export const storeTemplate = (template) => async dispatch => {
 
 export const fetchTemplate = () => async dispatch => {
     try {
-        const res = await axios.get('/api/current_template');
+        const res = await axios.get('/api/template');
         dispatch({ type: FETCH_TEMPLATE , payload: res.data });
     } catch (error) {
         dispatch({ type: ERROR_FETCH_TEMPLATE, payload: { data: [], error: true} });
@@ -33,7 +33,7 @@ export const fetchTemplate = () => async dispatch => {
 
 export const updateTemplate = (id, template) => async dispatch => {
     try {
-        const res = await axios.post('/api/current_template/update/' + id, template);
+        const res = await axios.post('/api/template/update/' + id, template);
         dispatch({ type: UPDATE_TEMPLATE, payload: res.data });
     } catch {
         dispatch({ type: ERROR_UPDATE_TEMPLATE, payload: { data: [], error: true} })
@@ -42,7 +42,7 @@ export const updateTemplate = (id, template) => async dispatch => {
 
 export const deleteTemplate = (id) => async dispatch => {
     try {
-        const res = await axios.delete('/api/current_template/'+id);
+        const res = await axios.delete('/api/template/'+id);
         dispatch({ type: DELETE_TEMPLATE , payload: res.data });
     } catch {
         dispatch({ type: ERROR_DELETE_TEMPLATE, payload: { data: [], error: true} });
