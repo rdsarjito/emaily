@@ -1,31 +1,21 @@
 const passport = require('passport');
-// const mid = require('../middleware');
-
-// const handlerSelanjutnya = (req, res, next) => {
-//   if (true) {
-//     next();
-//   } else {
-//     res.send('error di selanjutnya');
-//   }
-// }
-
-// const handleLogin = (req, res, next) => {
-//   console.log(req);
-//   res.send('success');
-// };
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
+const bcrypt = require('bcrypt');
 
 module.exports = app => {
+  // google oauth
   app.get(
     '/auth/google', passport.authenticate('google', {
       scope: ['profile', 'email']
     })
   );
 
-  // app.get('/login', mid, handlerSelanjutnya, handleLogin);
-
-  // app.get('/gagal', (req, res) => {
-  //   res.send('gagal auth');
-  // });
+  app.get(
+    '/auth/facebook', passport.authenticate('facebook', {
+      scope: 'email'
+    })
+  )
 
   app.get(
     '/auth/google/callback',
@@ -34,6 +24,15 @@ module.exports = app => {
       res.redirect('/surveys');
     });
 
+  // facebook oauth
+  app.get(
+    '/auth/facebook/callback',
+    passport.authenticate('facebook'),
+    (req, res) => {
+      res.redirect('/surveys');
+    }
+  )
+
   app.get('/api/logout', (req, res) => {
     req.logout();
     res.redirect('/');
@@ -41,6 +40,39 @@ module.exports = app => {
 
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
+  });
+
+  // auth
+  app.post('/auth/signUp', async (req, res) => {
+    const { username, email, password } = req.body;
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt)
+    const newUser = new User({ username, email, password: hashedPassword });
+
+    try {
+      const data = await newUser.save();
+      res.status(201).send(data);
+    } catch (error) {
+      res.status(500).json({ data: null, error: true })
+    }
+  });
+
+  app.post('/auth/signIn', async (req, res, done) => {
+    const user = await User.findOne({ username: req.body.username });
+    if (user == null) {
+      return res.status(400).send('Cannot find user');
+    }
+
+    try {
+      if(await bcrypt.compare(req.body.password, user.password)) {
+        res.send('Succes')
+        done(null, )
+      } else {
+        res.send('Nol Allowed')
+      }
+    } catch (error) {
+      res.status(500).send()
+    }
   });
 
 };

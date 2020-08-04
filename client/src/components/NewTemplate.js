@@ -19,7 +19,7 @@ class NewTemplate extends Component {
     this.setState({ namaTemplate: e.target.value });
   };
   _inputFileChange = async (e) => {
-    this.setState({ loading: true });
+    this.setState({ loading: true })
     const base64 = await this._toBase64File(e.target.files[0]);
     const response = await axios.post('/api/upload', { base64 });
     if (response.status === 201) {
@@ -39,13 +39,15 @@ class NewTemplate extends Component {
     e.preventDefault();
 
     const template = {
-      namaTemplate: this.state.namaTemplate
+      namaTemplate: this.state.namaTemplate,
+      file: this.state.file
     };
 
     this.props.storeTemplate(template);
 
     this.setState({
-      namaTemplate: ''
+      namaTemplate: '',
+      file: null
     });
   }
   render() {
@@ -68,11 +70,11 @@ class NewTemplate extends Component {
               <div className="row">
                 <div className="input-field col s6">
                   <input onChange={this._inputNamaTemplate} placeholder="Nama Template" value={this.state.namaTemplate} type="text" className="validate"></input>
-                  <img alt="sd" width="200" src={this.state.file} />
                 </div>
                 <div>
                   <h5>Tambah Gambar</h5>
                   <input onChange={this._inputFileChange} type="file"></input>
+                  <img alt="" width="200" src={this.state.file} />
                 </div>
               </div>
               <div className="row">

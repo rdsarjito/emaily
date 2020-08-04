@@ -14,7 +14,6 @@ module.exports = app => {
       const fullpath = `./public/${UUID()}.${fileType}`;
       await fs.writeFile(fullpath, sanitize, 'base64');
       res.status(201).json({ path: `http://localhost:5000${fullpath.replace('.', '')}` });
-      console.log(res)
     }
   );
 };

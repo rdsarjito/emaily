@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Template = mongoose.model('templates');
 
 module.exports = app => {
-  app.post('/api/template/new', async (req, res) => {
-    
-    const { namaTemplate } = req.body;
-    const newTemplate = new Template({ namaTemplate });
+  app.post('/api/template', async (req, res) => {
+    console.log(req.body)
+    const { namaTemplate, file } = req.body;
+    const newTemplate = new Template({ namaTemplate, file });
 
     try {
       const data = await newTemplate.save();

@@ -25,6 +25,4 @@ class Template extends Component {
   };
 };
 
-
-
 export default connect(null)(Template);

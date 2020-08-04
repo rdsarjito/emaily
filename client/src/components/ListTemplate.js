@@ -17,14 +17,16 @@ class ListTemplate extends Component {
   _deleteTemplate(id) {
     this.props.deleteTemplate(id);
     this.props.fetchTemplate();
-    console.log(this.props.templates)
   };
   
   _renderList() {
     return this.props.templates.map(template => {
       return (
         <li key={template._id} className="collection-item">
-          {template.namaTemplate}
+          <div>
+            <h5>{template.namaTemplate}</h5>
+            <img alt="" width="200" src={template.file} />
+          </div>
           <div>
             <Link
               className="btn edit-template"
@@ -40,6 +42,7 @@ class ListTemplate extends Component {
   };
 
   render() {
+    console.log(this.props.templates)
     return (
       <ul className="collection">
         {this._renderList()}
