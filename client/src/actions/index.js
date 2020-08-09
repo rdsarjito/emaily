@@ -8,12 +8,9 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const findData = (data) => async dispatch => {
-    try {
-        const res = await axios.post('/auth/signIn', data);
-        dispatch({ type: FETCH_DATA, payload: res.data })
-    } catch (error){
-        console.error();
-    }
+    const res = await axios.post('/auth/signIn', data);
+
+    dispatch({ type: FETCH_DATA, payload: res.data })
 }
 
 export const handleToken = (token) => async dispatch => {

@@ -12,7 +12,8 @@ import SignIn from './SignIn';
 
 class App extends Component {
   componentDidMount () {
-    this.props.fetchUser();  };
+    this.props.fetchUser();  
+  };
 
   render() {
     return (

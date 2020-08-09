@@ -1,8 +1,10 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
+const bcrypt = require('bcrypt');
 
 const credentialsGoogle = {
   clientID: keys.googleClientID,
@@ -17,7 +19,7 @@ const credentialsFacebook = {
   callbackURL: '/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)','email'],
   proxy: true
-}
+};
 
 const callbackStrategyGoogle = async (accessToken, refreshToken, profile, done) => {
   const existingUser = await User.findOne({ googleId: profile.id });
@@ -40,6 +42,24 @@ const callbackStrategyFacebook = async (accessToken, refreshToken, profile, done
   done(null, user);
 };
 
+const authenticateUser = async (username, password, done) => {
+  const existingUser = await User.findOne({ username: username });
+  console.log(existingUser)
+  if (existingUser == null) {
+    return done(null, false, { massage: 'No user with that email' });
+  }
+
+  try {
+    if (await bcrypt.compare(password, User.password)) {
+      return done(null, user)
+    } else {
+      return done(null, false, { massage: 'Password incorrect' });
+    }
+  } catch (error){
+    return done(error);
+  }
+}
+
 const User = mongoose.model('users')
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -53,3 +73,4 @@ passport.deserializeUser((id, done) => {
 
 passport.use(new GoogleStrategy(credentialsGoogle, callbackStrategyGoogle));
 passport.use(new FacebookStrategy(credentialsFacebook, callbackStrategyFacebook));
+passport.use(new LocalStrategy({ usernameField: 'username' }), authenticateUser);

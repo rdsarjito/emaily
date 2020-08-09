@@ -42,7 +42,7 @@ module.exports = app => {
     res.send(req.user);
   });
 
-  // auth
+  // oauth
   app.post('/auth/signUp', async (req, res) => {
     const { username, email, password } = req.body;
     const salt = await bcrypt.genSalt();
@@ -51,7 +51,7 @@ module.exports = app => {
 
     try {
       const data = await newUser.save();
-      res.status(201).send(data);
+      res.redirect('/surveys');
     } catch (error) {
       res.status(500).json({ data: null, error: true })
     }
@@ -65,8 +65,7 @@ module.exports = app => {
 
     try {
       if(await bcrypt.compare(req.body.password, user.password)) {
-        res.send('Succes')
-        done(null, )
+        res.json(user)
       } else {
         res.send('Nol Allowed')
       }
