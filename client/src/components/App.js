@@ -13,10 +13,10 @@ import { JWT_TOKEN } from '../actions/types';
 
 class App extends Component {
   componentDidMount () {
+    const token = localStorage.getItem(JWT_TOKEN);
     this.props.fetchUser();
-    if(localStorage.getItem(JWT_TOKEN)) {
-      this.props.fetchData();
-      console.log('tampil')
+    if(token) {
+      this.props.fetchData({token});
     };
 
   };

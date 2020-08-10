@@ -82,8 +82,11 @@ module.exports = app => {
   })
 
   function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1];
+    const getToken = req.body.token.split(':')[1];
+    const getTokenLagi = getToken.split('}')[0];
+    const getTokenLagiLagi = getTokenLagi.split('"')
+    console.log(getTokenLagiLagi[1])
+    const token = getTokenLagiLagi[1]
     if(token == null) return res.sendStatus(401);
 
     jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (err, user) => {

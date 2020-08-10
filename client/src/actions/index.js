@@ -18,7 +18,7 @@ export const findData = (data) => async dispatch => {
 }
 
 export const fetchData = (data) => async dispatch => {
-    const res = await axios.post('/api/post');
+    const res = await axios.post('/api/post', data);
     console.log(res)
     dispatch({ type: FETCH_DATA, payload: res.data })
 }
@@ -73,4 +73,3 @@ export const storeData = (data) => async dispatch => {
         dispatch({ type: STORE_DATA, payload: { data: [], error: true } });
     }
 }
-
