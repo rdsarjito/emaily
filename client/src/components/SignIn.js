@@ -39,7 +39,6 @@ class SignIn extends Component {
 
   };
   render() {
-    console.log(this.state)
     return (
       <div className="row">
         <form className="row s12" onSubmit={this._onSubmit}>

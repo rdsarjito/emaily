@@ -1,4 +1,5 @@
 export const FETCH_USER = 'fetch_user';
+export const FIND_DATA = 'find_data';
 export const FETCH_DATA = 'fetch_data';
 export const FETCH_TEMPLATE = 'fetch_template';
 export const STORE_TEMPLATE = 'store_template';
@@ -9,3 +10,4 @@ export const ERROR_CREATE_TEMPLATE = 'failed_create_template';
 export const ERROR_UPDATE_TEMPLATE = 'failed_update_template';
 export const ERROR_FETCH_TEMPLATE = 'failed_fetch_template';
 export const STORE_DATA = 'store_data';
+export const JWT_TOKEN = 'jwt_token';

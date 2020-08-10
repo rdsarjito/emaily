@@ -8,4 +8,6 @@ module.exports = {
   cookieKey: dotenv.COOKIE_KEY,
   stripePublishableKey: dotenv.REACT_STRIPE_PUBLISHABLE_KEY,
   stripeSecretKey: dotenv.REACT_STRIPE_SECRET_KEY,
+  accesTokenSecretKey: dotenv.ACCES_TOKEN_SECRET,
+  refreshTokenSecret: dotenv.REFRESH_TOKEN_SECRET
 }; 

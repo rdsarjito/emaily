@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_TEMPLATE, STORE_TEMPLATE, ERROR_CREATE_TEMPLATE, ERROR_FETCH_TEMPLATE, DELETE_TEMPLATE, ERROR_DELETE_TEMPLATE, UPDATE_TEMPLATE, ERROR_UPDATE_TEMPLATE, STORE_DATA, FETCH_DATA } from './types'
+import { FETCH_USER, FETCH_TEMPLATE, STORE_TEMPLATE, ERROR_CREATE_TEMPLATE, ERROR_FETCH_TEMPLATE, DELETE_TEMPLATE, ERROR_DELETE_TEMPLATE, UPDATE_TEMPLATE, ERROR_UPDATE_TEMPLATE, STORE_DATA, FETCH_DATA, FIND_DATA } from './types'
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
@@ -10,10 +10,17 @@ export const fetchUser = () => async dispatch => {
 export const findData = (data) => async dispatch => {
     try {
         const res = await axios.post('/auth/signIn', data);
-        dispatch({ type: FETCH_DATA, payload: res.data })
+        console.log(res.data)
+        dispatch({ type: FIND_DATA, payload: res.data })
     } catch (error){
         console.error();
     }
+}
+
+export const fetchData = (data) => async dispatch => {
+    const res = await axios.post('/api/post');
+    console.log(res)
+    dispatch({ type: FETCH_DATA, payload: res.data })
 }
 
 export const handleToken = (token) => async dispatch => {

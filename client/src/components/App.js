@@ -9,10 +9,17 @@ import NewTemplate from './NewTemplate';
 import EditTemplate from './EditTamplate';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import { JWT_TOKEN } from '../actions/types';
 
 class App extends Component {
   componentDidMount () {
-    this.props.fetchUser();  };
+    this.props.fetchUser();
+    if(localStorage.getItem(JWT_TOKEN)) {
+      this.props.fetchData();
+      console.log('tampil')
+    };
+
+  };
 
   render() {
     return (
@@ -34,5 +41,6 @@ class App extends Component {
 
 const mapDispatchToProps = {
   fetchUser: actions.fetchUser,
+  fetchData: actions.fetchData
 }
 export default connect(null, mapDispatchToProps)(App);

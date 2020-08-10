@@ -2,6 +2,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = app => {
   // google oauth
@@ -57,16 +58,16 @@ module.exports = app => {
     }
   });
 
-  app.post('/auth/signIn', async (req, res, done) => {
-    const user = await User.findOne({ username: req.body.username });
-    if (user == null) {
+  app.post('/auth/signIn', async (req, res) => {
+    const users = await User.findOne({ username: req.body.username });
+    if (users == null) {
       return res.status(400).send('Cannot find user');
     }
 
     try {
-      if(await bcrypt.compare(req.body.password, user.password)) {
-        res.send('Succes')
-        done(null, )
+      if(await bcrypt.compare(req.body.password, users.password)) {
+        const accesToken = jwt.sign({users}, process.env.ACCES_TOKEN_SECRET)
+        res.json({ accesToken: accesToken })
       } else {
         res.send('Nol Allowed')
       }
@@ -74,5 +75,22 @@ module.exports = app => {
       res.status(500).send()
     }
   });
+
+  app.post('/api/post', authenticateToken, async (req, res) => {
+    const users = await User.findOne({ username: req.user.users.username });
+    res.json(users)
+  })
+
+  function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1];
+    if(token == null) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (err, user) => {
+      if(err) return res.sendStatus(403);
+      req.user = user;
+      next();
+    })
+  }
 
 };
