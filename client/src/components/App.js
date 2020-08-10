@@ -4,25 +4,34 @@ import { connect } from 'react-redux';
 import * as actions from '../actions'
 
 import Header from './Header';
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
-const Landing = () => <h2>Landing</h2>
+import Template from './Templates';
+import NewTemplate from './NewTemplate';
+import EditTemplate from './EditTamplate';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import { JWT_TOKEN } from '../actions/types';
 
 class App extends Component {
   componentDidMount () {
+    const token = localStorage.getItem(JWT_TOKEN);
     this.props.fetchUser();
+    if(token) {
+      this.props.fetchData({token});
+    };
+
   };
 
   render() {
     return (
       <div className="container">
         <BrowserRouter>
-          <button onClick={this.props.addIncrement} >increment {this.props.counter}</button>
           <div>
             <Header />
-            <Route exact={true} path="/" component={Landing} />
-            <Route exact={true} path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
+            <Route exact={true} path="/template" component={Template} />
+            <Route path="/template/new" component={NewTemplate} />
+            <Route path="/template/edit/:id" component={EditTemplate} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/signin" component={SignIn} />
           </div>
         </BrowserRouter>
       </div>
@@ -30,16 +39,8 @@ class App extends Component {
   };
 };
 
-const mapStateToProps = (state) => {
-  return {
-    listDataBarang: state.barang.listBarang,
-    counter: state.increment,
-  }
-}
-
 const mapDispatchToProps = {
   fetchUser: actions.fetchUser,
-  addIncrement: actions.addIncrement,
+  fetchData: actions.fetchData
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

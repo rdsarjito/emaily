@@ -1,0 +1,22 @@
+h2, h5 {
+  margin: 0;
+  padding: 0;
+}
+.avatar {
+  width: 65px;
+}
+.add-template {
+  margin-right: 10px;
+}
+.template-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+}
+.edit-template {
+  margin-right: 10px;
+}

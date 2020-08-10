@@ -6,6 +6,8 @@ module.exports = {
   facebookClientSecret: dotenv.FACEBOOK_CLIENT_SECRET,
   mongoURI: dotenv.MONGO_URI,
   cookieKey: dotenv.COOKIE_KEY,
-  stripePublishableKey: dotenv.STRIPE_PUBLISHABLE_KEY,
-  stripeSecretKey: dotenv.STRIPE_SECRET_KEY,
+  stripePublishableKey: dotenv.REACT_STRIPE_PUBLISHABLE_KEY,
+  stripeSecretKey: dotenv.REACT_STRIPE_SECRET_KEY,
+  accesTokenSecretKey: dotenv.ACCES_TOKEN_SECRET,
+  refreshTokenSecret: dotenv.REFRESH_TOKEN_SECRET
 }; 
