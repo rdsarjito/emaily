@@ -30,7 +30,7 @@ class SignIn extends Component {
       password: this.state.password
     }
 
-    this.props.findData(data);
+    this.props.login(data);
     
     this.setState({
       username: '',

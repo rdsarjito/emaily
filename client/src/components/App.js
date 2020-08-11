@@ -12,14 +12,6 @@ import SignIn from './SignIn';
 import { JWT_TOKEN } from '../actions/types';
 
 class App extends Component {
-  componentDidMount () {
-    const token = localStorage.getItem(JWT_TOKEN);
-    this.props.fetchUser();
-    if(token) {
-      this.props.fetchData({token});
-    };
-
-  };
 
   render() {
     return (
