@@ -1,5 +1,5 @@
 export const FETCH_USER = 'fetch_user';
-export const FIND_DATA = 'find_data';
+export const SIGN_IN = 'sign_in';
 export const FETCH_DATA = 'fetch_data';
 export const FETCH_TEMPLATE = 'fetch_template';
 export const STORE_TEMPLATE = 'store_template';

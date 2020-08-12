@@ -61,39 +61,18 @@ module.exports = app => {
   app.post('/auth/signIn', async (req, res) => {
     const users = await User.findOne({ username: req.body.username });
     if (users == null) {
-      return res.status(400).send('Cannot find user');
+      return res.status(400).send('Cannot find username');
     }
 
     try {
       if(await bcrypt.compare(req.body.password, users.password)) {
         const accesToken = jwt.sign({users}, process.env.ACCES_TOKEN_SECRET)
-        res.json({ accesToken: accesToken })
+        res.status(200).json({ accesToken: accesToken })
       } else {
-        res.send('Nol Allowed')
+        res.status(404).send('Password salah')
       }
     } catch (error) {
       res.status(500).send()
     }
   });
-
-  app.post('/api/post', authenticateToken, async (req, res) => {
-    const users = await User.findOne({ username: req.user.users.username });
-    res.json(users);
-  })
-
-  function authenticateToken(req, res, next) {
-    console.log(req.body.token)
-    const getToken = req.body.token.split(':')[1];
-    const getTokenLagi = getToken.split('}')[0];
-    const getTokenLagiLagi = getTokenLagi.split('"')
-    const token = getTokenLagiLagi[1]
-    if(token == null) return res.sendStatus(401);
-
-    jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (err, user) => {
-      if(err) return res.sendStatus(403);
-      req.user = user;
-      next();
-    })
-  }
-
 };

@@ -1,15 +1,10 @@
-import { JWT_TOKEN, FETCH_DATA, FIND_DATA } from '../actions/types';
+import { JWT_TOKEN, SIGN_IN } from '../actions/types';
 
-import { saveToLocalStorage } from '../helper/localStorage';
+const initialState = localStorage.getItem(JWT_TOKEN) || false
 
-export default (state = {}, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case FIND_DATA:
-      let newArr = [];
-      newArr.push(action.payload);
-      saveToLocalStorage(JWT_TOKEN, newArr);
-      return newArr;
-    case FETCH_DATA:
+    case SIGN_IN:
       return action.payload;
     default:
       return state;

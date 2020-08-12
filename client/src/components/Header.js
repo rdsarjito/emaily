@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
-import { JWT_TOKEN } from '../actions/types';
+import * as actions from '../actions'
 
 class Header extends Component {
-  _onDelete() {
-    localStorage.removeItem(JWT_TOKEN)
-  }
+  componentDidMount () {
+    this.props.fetchUser();
+  };
+
+  _buttonSignOut = () => {
+    this.props.signOut()
+  };
 
   _renderContent() {
-    switch (this.props.auth){
+    switch (this.props.auth || this.props.authJWT){
       case null:
         return;
       case false:
@@ -31,7 +35,7 @@ class Header extends Component {
       default:
         return [
           <li key="1">
-            <a href="/template" className="btn">Add Template</a>
+            <a href="/template">Add Template</a>
           </li>,
           <li key="2"><Payments /></li>,
           <li key="3" style={{ margin: '0 10px' }}>
@@ -40,7 +44,7 @@ class Header extends Component {
           <li key="4" className="avatar-box">
             <img src={this.props.auth.avatar} alt="avatar" className="avatar"></img>
           </li>,
-          <li key="5"><a href='/api/logout' onClick={this._onDelete}>Logout</a></li>,
+          <li key="5"><a href='/api/logout' onClick={this._buttonSignOut}>Logout</a></li>,
         ];
     };
   };
@@ -65,8 +69,16 @@ class Header extends Component {
 
 };
 
-function mapStateToProps({ auth }) {
-  return { auth: auth }
+function mapStateToProps(state) {
+  return { 
+    auth: state.auth,
+    authJWT: state.authJWT
+  }
 }
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = {
+  fetchUser: actions.fetchUser,
+  signOut: actions.signOut,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import axios from 'axios';
 
 class SignUp extends Component {
   constructor() {
@@ -32,17 +31,14 @@ class SignUp extends Component {
   _onSubmit = async(e) => {
     e.preventDefault();
 
-    const data = {
+    const userData = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password
     };
 
-    const response = await axios.post('/auth/signUp', data);
-    
-    if (response.status === 201) {
-      window.alert("Berhasil Sign Up")
-    }
+    this.props.signUp(userData);
+        
     this.setState({
       username: '',
       email: '',
@@ -55,22 +51,26 @@ class SignUp extends Component {
     return (
       <div>
         <form onSubmit={this._onSubmit}>
+        <h2>Sign Up</h2>
           <div>
             <div>
-              <input onChange={this._inputUsernameChange} id="username" type="text" className="validate" placeholder="Username" value={this.state.username}></input>
+              <h5>Username</h5>
+              <input onChange={this._inputUsernameChange} id="username" type="text" className="validate" placeholder="Masukan Username" value={this.state.username}></input>
             </div>
           </div>
           <div>
             <div>
-              <input onChange={this._inputEmailChange} id="email" type="email" className="validate" placeholder="Email" value={this.state.email}></input>
+              <h5>Email</h5>
+              <input onChange={this._inputEmailChange} id="email" type="email" className="validate" placeholder="Masukan Email" value={this.state.email}></input>
             </div>
           </div>
           <div>
             <div>
-              <input onChange={this._inputPasswordChange} id="password" type="password" className="validate" placeholder="Password" value={this.state.password}></input>
+              <h5>Password</h5>
+              <input onChange={this._inputPasswordChange} id="password" type="password" className="validate" placeholder="Masukan Password" value={this.state.password}></input>
             </div>
           </div>
-          <button className="btn" onSubmit={this._onSubmit}>Daftar</button>
+          <button className="btn" onSubmit={this._onSubmit}>Sign Up</button>
         </form>    
       </div> 
     );
