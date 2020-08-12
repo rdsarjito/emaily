@@ -9,5 +9,4 @@ export const ERROR_DELETE_TEMPLATE = 'failed_delete_template';
 export const ERROR_CREATE_TEMPLATE = 'failed_create_template';
 export const ERROR_UPDATE_TEMPLATE = 'failed_update_template';
 export const ERROR_FETCH_TEMPLATE = 'failed_fetch_template';
-export const STORE_DATA = 'store_data';
 export const JWT_TOKEN = 'jwt_token';

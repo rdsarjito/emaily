@@ -78,14 +78,14 @@ module.exports = app => {
 
   app.post('/api/post', authenticateToken, async (req, res) => {
     const users = await User.findOne({ username: req.user.users.username });
-    res.json(users)
+    res.json(users);
   })
 
   function authenticateToken(req, res, next) {
+    console.log(req.body.token)
     const getToken = req.body.token.split(':')[1];
     const getTokenLagi = getToken.split('}')[0];
     const getTokenLagiLagi = getTokenLagi.split('"')
-    console.log(getTokenLagiLagi[1])
     const token = getTokenLagiLagi[1]
     if(token == null) return res.sendStatus(401);
 

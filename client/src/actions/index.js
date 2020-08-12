@@ -1,11 +1,23 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_TEMPLATE, STORE_TEMPLATE, ERROR_CREATE_TEMPLATE, ERROR_FETCH_TEMPLATE, DELETE_TEMPLATE, ERROR_DELETE_TEMPLATE, UPDATE_TEMPLATE, ERROR_UPDATE_TEMPLATE, STORE_DATA, FETCH_DATA, FIND_DATA } from './types'
+import { 
+    FETCH_USER, 
+    FETCH_TEMPLATE, 
+    STORE_TEMPLATE, 
+    ERROR_CREATE_TEMPLATE, 
+    ERROR_FETCH_TEMPLATE, 
+    DELETE_TEMPLATE, 
+    ERROR_DELETE_TEMPLATE, 
+    UPDATE_TEMPLATE, 
+    ERROR_UPDATE_TEMPLATE, 
+    FETCH_DATA, 
+    FIND_DATA, 
+} from './types'
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
 
     dispatch({ type: FETCH_USER, payload: res.data });
-};
+}
 
 export const findData = (data) => async dispatch => {
     try {
@@ -27,7 +39,7 @@ export const handleToken = (token) => async dispatch => {
     const res = await axios.post('/api/stripe', token);
 
     dispatch({ type: FETCH_USER, payload: res.data });
-};
+}
 
 export const storeTemplate = (template) => async dispatch => {
     try {
@@ -62,14 +74,5 @@ export const deleteTemplate = (id) => async dispatch => {
         dispatch({ type: DELETE_TEMPLATE , payload: res.data });
     } catch {
         dispatch({ type: ERROR_DELETE_TEMPLATE, payload: { data: [], error: true} });
-    }
-}
-
-export const storeData = (data) => async dispatch => {
-    try {
-        const res = await axios.post('/auth/signUp', data);
-        dispatch({ type: STORE_DATA, payload: res.data })
-    } catch {
-        dispatch({ type: STORE_DATA, payload: { data: [], error: true } });
     }
 }

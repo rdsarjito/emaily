@@ -40,16 +40,15 @@ class SignIn extends Component {
   };
   render() {
     return (
-      <div className="row">
-        <form className="row s12" onSubmit={this._onSubmit}>
-          <div className="row">
-            <div className="input-field col s12">
-              <input onChange={this._inputUsernameChange} id="username" type="text" className="validate" placeholder="Username"></input>
-            </div>
+      <div className="container-sign-in">
+        <form onSubmit={this._onSubmit}>
+          <h2>Login</h2>
+          <div>
+            <input onChange={this._inputUsernameChange} id="username" placeholder="Username" value={this.state.username}></input>
           </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input onChange={this._inputPasswordChange} id="password" type="password" className="validate" placeholder="Password" ></input>
+          <div>
+            <div >
+              <input onChange={this._inputPasswordChange} id="password" placeholder="Password" value={this.state.password}></input>
             </div>
           </div>
           <button onSubmit={this._onSubmit}>Daftar</button>
