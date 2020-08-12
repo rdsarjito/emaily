@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { JWT_TOKEN } from '../actions/types';
 
 class NewTemplate extends Component {
   constructor() {
@@ -38,12 +39,14 @@ class NewTemplate extends Component {
   _onSubmit(e) {
     e.preventDefault();
 
-    const template = {
+    const dataTemplate = {
       namaTemplate: this.state.namaTemplate,
       file: this.state.file
     };
 
-    this.props.storeTemplate(template);
+    const accesToken = localStorage.getItem(JWT_TOKEN)
+    
+    this.props.storeTemplate(dataTemplate, accesToken);
 
     this.setState({
       namaTemplate: '',

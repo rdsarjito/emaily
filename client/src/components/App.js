@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions'
 
 import Header from './Header';
 import Template from './Templates';
@@ -9,18 +8,8 @@ import NewTemplate from './NewTemplate';
 import EditTemplate from './EditTamplate';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import { JWT_TOKEN } from '../actions/types';
 
 class App extends Component {
-  componentDidMount () {
-    const token = localStorage.getItem(JWT_TOKEN);
-    this.props.fetchUser();
-    if(token) {
-      this.props.fetchData({token});
-    };
-
-  };
-
   render() {
     return (
       <div className="container">
@@ -39,8 +28,4 @@ class App extends Component {
   };
 };
 
-const mapDispatchToProps = {
-  fetchUser: actions.fetchUser,
-  fetchData: actions.fetchData
-}
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null)(App);

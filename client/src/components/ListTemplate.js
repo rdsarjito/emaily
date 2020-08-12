@@ -2,21 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
+import { JWT_TOKEN } from '../actions/types';
 
 class ListTemplate extends Component {
   constructor() {
     super();
 
+    this.state = {
+      accesToken: localStorage.getItem(JWT_TOKEN),
+    }
+
     this._deleteTemplate = this._deleteTemplate.bind(this);
   };
 
   componentDidMount() {
-    this.props.fetchTemplate();
+    this.props.fetchTemplate(this.state.accesToken);
   };
   
   _deleteTemplate(id) {
-    this.props.deleteTemplate(id);
-    this.props.fetchTemplate();
+    this.props.deleteTemplate(id, this.state.accesToken);
+    this.props.fetchTemplate(this.state.accesToken);
   };
   
   _renderList() {

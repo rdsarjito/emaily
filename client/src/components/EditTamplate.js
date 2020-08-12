@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
+import { JWT_TOKEN } from '../actions/types';
 
 class EditTamplate extends Component {
   constructor() {
     super();
     this.state = {
-      namaTemplate: ''
+      namaTemplate: '',
+      accesToken: localStorage.getItem(JWT_TOKEN)
     };
     this._inputNamaTemplate = this._inputNamaTemplate.bind(this);
     this._onSubmit = this._onSubmit.bind(this);
@@ -19,11 +21,11 @@ class EditTamplate extends Component {
   _onSubmit(e) {
     e.preventDefault();
 
-    const template = {
+    const dataTemplate = {
       namaTemplate: this.state.namaTemplate
     };
 
-    this.props.updateTemplate(this.props.match.params.id,template);
+    this.props.updateTemplate(this.props.match.params.id, dataTemplate, this.state.accesToken);
 
     this.setState({
       namaTemplate: ''

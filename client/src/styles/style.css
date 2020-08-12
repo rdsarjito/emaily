@@ -1,6 +1,29 @@
+form {
+  color: #ee6e71;
+  width: 60%;
+  padding: 1.5rem;
+  margin: auto;
+}
 h2, h5 {
   margin: 0;
   padding: 0;
+}
+h2{
+  font-size: 2.1em;
+  font-weight: bold;
+  margin: 3rem 0 2rem 0;
+}
+h5 {
+  font-size: 1.3rem;
+}
+input {
+  color: #ee6e71;
+}
+.container {
+  background-color: #fef6f7;
+}
+.btn {
+  background-color: #ee6e71;
 }
 .avatar {
   width: 65px;
